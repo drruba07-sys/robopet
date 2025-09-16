@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <h2>RoboPet Controller</h2>
+    <h2>RoboPet Controller (PutarJS)</h2>
     <script src="https://js.puter.com/v2/"></script>
 
     <script>
         async function askPutter(question) {
+            // Ask PutarJS
             const answer = await puter.ai.chat(question);
             console.log("Putter Response:", answer);
-            // You can send the response to ESP32 via HTTP POST
+
+            // Send response to ESP32
             fetch("http://ESP32_IP_ADDRESS/action", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({command: answer})
+                body: JSON.stringify(answer)
             });
         }
 
         // Example usage
-        askPutter("Why did the chicken cross the road?");
+        askPutter("Turn the light on");
+        askPutter("Turn the light off");
+        askPutter("Blink on");
     </script>
 </body>
 </html>
-
